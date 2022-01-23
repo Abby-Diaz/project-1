@@ -1,0 +1,103 @@
+// Abigail Diaz.
+// CS 1, Section 0108.
+// Assignment 4, problem 1.
+// Description: Find a perfect number between two integers. 
+
+
+#include <iostream>
+using namespace std;
+
+bool isAFactor(int , int);
+
+int main()
+{   // initialize variables
+    
+    int max, min; // numbers should be reordered min-max
+    int startval, endval;
+    bool perfect_num;
+    int true_once=0;
+    
+    // prompt user and check for negative user inputs
+    cout << "Enter starting integer: ";
+    cin>> startval;
+    
+    
+    while (startval<=0)
+    {
+        cout << "Please input a positive starting integer: ";
+        cin >> startval;
+    }
+    
+    cout<< "\nEnter ending integer: ";
+    cin >> endval; 
+    
+    while (endval<=0)
+    {
+        cout << "Please input a positive ending integer: ";
+        cin >> endval;
+    }
+    
+    
+    // Assume startval is the smallest number and endval the largest.
+    min=startval;
+    max=endval;
+
+   if (startval>endval)
+   {
+       min=endval;
+       max=startval;
+   }
+
+// Set original input declarations since it will be changed later on.
+
+    int original_startval = min;
+    int sum;
+    
+    while (min<=max)
+    {   sum=0;
+        // loop that checks which counter gives a remainder of zero when min is divided by them
+        for (int i=1; i<min; i++)
+        {
+            if (isAFactor(min, i))
+            { 
+                sum += i;
+            }
+        }
+        
+        // check if min adds up to the sum of factors
+        if (min==sum)
+        {
+            cout << "\n" << min << " is a perfect number." << endl;
+            true_once=1;            
+        }
+        
+    min++; 
+        
+    }
+    // end of while loop
+    
+        if (true_once==0)
+        cout << "\nThere is no perfect number between " << original_startval << " and " << max << ".";   
+    
+    return 0;
+} // end of program
+    
+
+    // function will check if divisor is a factor
+    bool isAFactor(int min, int divisor)
+ 
+    {   bool factor;
+        //check if integer is a factor
+      
+        if (min%divisor==0)
+        {
+            factor=true;
+        }
+        
+        else 
+        {
+            factor=false;
+        }
+    
+    return factor;
+}
